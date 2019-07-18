@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Star Jedi", Arial, Helvetica, sans-serif;
-    src: url(./fonts/boba-fonts_star-jedi/Starjedi.ttf) format("truetype");
+    src: url(../fonts/boba-fonts_star-jedi/Starjedi.ttf) format("truetype");
 }
 
 @font-face {
     font-family: "moonhouse", Arial, Helvetica, sans-serif;
-    src: url(./fonts/nimavisual_moonhouse/moonhouse.ttf) format("truetype");
+    src: url(../fonts/nimavisual_moonhouse/moonhouse.ttf) format("truetype");
 }
 
 body {
