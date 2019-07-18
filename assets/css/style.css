@@ -2,8 +2,22 @@
 
 body {
     font-family: "moonhouseregular", Arial, Helvetica, sans-serif;
+    background-image: url("../../assets/images/starWarsBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "star_jediregular", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 5em;
+}
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 1500px;
+    }
 }
