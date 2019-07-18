@@ -1,0 +1,17 @@
+@font-face {
+    font-family: "starjedi", Arial, Helvetica, sans-serif;
+    src: url(../fonts/boba-fonts_star-jedi/Starjedi.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "moonhouse", Arial, Helvetica, sans-serif;
+    src: url(../fonts/nimavisual_moonhouse/moonhouse.ttf) format("truetype");
+}
+
+body {
+    font-family: "moonhouse", Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "starjedi", Arial, Helvetica, sans-serif;
+}
