@@ -5,7 +5,7 @@
 
 @font-face {
     font-family: "moonhouse", Arial, Helvetica, sans-serif;
-    src: url(../assets/fonts/nimavisual_moonhouse/moonhouse.ttf) format("truetype");
+    src: url(../fonts/nimavisual_moonhouse/moonhouse.ttf) format("truetype");
 }
 
 body {
