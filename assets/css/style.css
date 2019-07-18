@@ -1,17 +1,9 @@
-@font-face {
-    font-family: "Star Jedi", Arial, Helvetica, sans-serif;
-    src: url(../fonts/starjedi/Starjedi.ttf) format("truetype");
-}
-
-@font-face {
-    font-family: "moonhouse", Arial, Helvetica, sans-serif;
-    src: url(../fonts/moonhouse/moonhouse.ttf) format("truetype");
-}
+@import "fonts/starWarsFonts/stylesheet.css";
 
 body {
-    font-family: "moonhouse", Arial, Helvetica, sans-serif;
+    font-family: "moonhouseregular", Arial, Helvetica, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Star Jedi", Arial, Helvetica, sans-serif;
+    font-family: "star_jediregular", Arial, Helvetica, sans-serif;
 }
