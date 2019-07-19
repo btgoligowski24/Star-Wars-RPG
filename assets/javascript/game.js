@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    var cardDeckDiv = $("<div>");
     var availCharsElem = $("#availChars");
     var yourCharElem = $("#yourChar");
     var enemiesElem = $("#enemies");
@@ -31,21 +32,18 @@ $(document).ready(function () {
     }];
 
     function generateChars() {
-        var cardDeckDiv = $("<div>");
-        $(cardDeckDiv).attr("class", "card-deck my-2");
+        $(cardDeckDiv).attr("class", "card-deck");
         $(availCharsElem).append(cardDeckDiv);
         $.each(chars, function (index, key) {
-            console.log("index: ", index);
-            console.log("key: ", key);
             var cardDiv = $("<div>");
             var cardBodyDiv = $("<div>");
             var cardHeader = $("<h5>");
             var cardImg = $("<img>");
             var cardFooter = $("<p>");
             if (index === 0) {
-                $(cardDiv).attr("class", "card text-center mr-1 bgNormal");
+                $(cardDiv).attr("class", "card text-center mr-1 my-2 bgNormal");
             } else {
-                $(cardDiv).attr("class", "card text-center mx-1 bgNormal");
+                $(cardDiv).attr("class", "card text-center mx-1 my-2 bgNormal");
             }
             $(cardDeckDiv).append(cardDiv);
             $(cardBodyDiv).attr("class", "card-body py-1 px-2");
@@ -65,4 +63,27 @@ $(document).ready(function () {
         })
     }
     generateChars();
+
+    var charElems = $.makeArray($(".card"));
+    
+    $(charElems).each(function (index, value) {
+        $(value).on("click", function () {
+            $(availCharsElem).css("display", "none");
+            $(value).detach();
+            if ($(value).hasClass("mx-1")) {
+                $(value).removeClass("mx-1");
+            }
+            $(yourCharElem).append(value);
+            $(cardDeckDiv).detach();
+            $(enemiesElem).append(cardDeckDiv);
+            $(".card-deck .card").each(function (index, value) {
+                $(value).removeClass("bgNormal").addClass("bgRed");
+                if (index === 0) {
+                    if ($(value).hasClass("mx-1")) {
+                        $(value).removeClass("mx-1").addClass("mr-1");
+                    }
+                }
+            })
+        })
+    })
 })

@@ -33,6 +33,10 @@ h1 {
     max-width: 50%;
 }
 
+#yourChar .card {
+    max-width: 16%;
+}
+
 .bgNormal {
     color: black;
     border: 3px solid green;
