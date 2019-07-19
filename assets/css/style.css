@@ -33,8 +33,8 @@ h1 {
     max-width: 50%;
 }
 
-#yourChar .card {
-    max-width: 16%;
+.card-deck .card {
+    max-width: 25%;
 }
 
 .bgNormal {
@@ -50,5 +50,6 @@ h1 {
 
 .bgBlack {
     background-color: black;
+    color: inherit;
     border: 3px solid green;
 }

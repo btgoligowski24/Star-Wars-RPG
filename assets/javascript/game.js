@@ -1,10 +1,16 @@
 $(document).ready(function () {
 
-    var cardDeckDiv = $("<div>");
+    var cardDeckDiv = $("<div class=\"card-deck\">");
     var availCharsElem = $("#availChars");
     var yourCharElem = $("#yourChar");
     var enemiesElem = $("#enemies");
     var fightElem = $("#fight");
+    var attackElem = $("#attack");
+    var myAttackElem = $("#myAttack");
+    var thierAttackElem = $("#theirAttack");
+    var attackPower;
+    var counterAttackPower;
+    var hp;
     var chars = [{
         name: "Rey",
         attack: 6,
@@ -32,7 +38,6 @@ $(document).ready(function () {
     }];
 
     function generateChars() {
-        $(cardDeckDiv).attr("class", "card-deck");
         $(availCharsElem).append(cardDeckDiv);
         $.each(chars, function (index, key) {
             var cardDiv = $("<div>");
@@ -53,7 +58,7 @@ $(document).ready(function () {
             $(cardBodyDiv).append(cardHeader);
             $(cardImg).attr({
                 src: key.img,
-                class: "card-img-top playerImg",
+                class: "card-img-top playerImg rounded",
                 alt: key.name + " image was supposed to go here."
             });
             $(cardBodyDiv).append(cardImg);
@@ -65,25 +70,69 @@ $(document).ready(function () {
     generateChars();
 
     var charElems = $.makeArray($(".card"));
-    
+
+    function removeChar(value) {
+        $(value).detach();
+        if ($(value).hasClass("mx-1")) {
+            $(value).removeClass("mx-1");
+        }
+    }
+
+    function resetCardMargin(value) {
+        if ($(value).hasClass("mx-1")) {
+            $(value).removeClass("mx-1").addClass("mr-1");
+        }
+    }
+
+    function resetCardDeckMargin(index, value) {
+        if (index === 0) {
+            resetCardMargin(value);
+        }
+    }
+
+    function changeBGColor(value) {
+        $(value).removeClass("bgNormal").addClass($(value).parent().parent().attr("data-bgColor"));
+    }
+
     $(charElems).each(function (index, value) {
         $(value).on("click", function () {
-            $(availCharsElem).css("display", "none");
-            $(value).detach();
-            if ($(value).hasClass("mx-1")) {
-                $(value).removeClass("mx-1");
-            }
-            $(yourCharElem).append(value);
-            $(cardDeckDiv).detach();
-            $(enemiesElem).append(cardDeckDiv);
-            $(".card-deck .card").each(function (index, value) {
-                $(value).removeClass("bgNormal").addClass("bgRed");
-                if (index === 0) {
-                    if ($(value).hasClass("mx-1")) {
-                        $(value).removeClass("mx-1").addClass("mr-1");
-                    }
+            var newCardDeckDiv = $("<div class=\"card-deck\">");
+            if ($("#availChars .card-deck").length > 0) {
+                $(availCharsElem).css("display", "none");
+                removeChar(value);
+                $(yourCharElem).append(newCardDeckDiv);
+                $(newCardDeckDiv).append(value);
+                $(cardDeckDiv).detach();
+                $(enemiesElem).append(cardDeckDiv);
+                $("#enemies .card-deck .card").each(function (index, value) {
+                    changeBGColor(value);
+                    resetCardDeckMargin(index, value);
+                })
+            } else if ($("#enemies .card").length > 0 && $("#fight .card").length === 0) {
+                removeChar(value);
+                $(fightElem).append(newCardDeckDiv);
+                $(newCardDeckDiv).append(value);
+                if ($("#enemies .card").hasClass("mx-1")) {
+                    $("#enemies .card").removeClass("mx-1").addClass("mr-1");
                 }
-            })
+                resetCardMargin(value);
+                changeBGColor(value);
+            }
         })
     })
+
+
+    $(attackElem).on("click", function () {
+        if (!$("#yourChar .card").length) {
+            alert("You must choose a character first!")
+        } else {
+            if (!$("#fight .card").length) {
+                $("myAttack").text("No enemy to attack");
+                $("theirAttack").text("");
+            } else {
+
+            }
+        }
+    })
+
 })
