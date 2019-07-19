@@ -8,7 +8,16 @@ body {
     color: white;
 }
 
-h1, h2, h3, h4, h5, h6 {
+#header {
+    margin-right: 10%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "star_jediregular", Arial, Helvetica, sans-serif;
 }
 
@@ -16,8 +25,23 @@ h1 {
     font-size: 5em;
 }
 
-@media (min-width: 1200px) {
-    .container{
-        max-width: 1500px;
-    }
+.container {
+    max-width: 100%;
+}
+
+.card-deck {
+    max-width: 50%;
+}
+
+.bgNormal {
+    color: black;
+}
+
+.bgRed {
+    background-color: red;
+    color: black;
+}
+
+.bgBlack {
+    background-color: black;
 }
