@@ -35,13 +35,16 @@ h1 {
 
 .bgNormal {
     color: black;
+    border: 3px solid green;
 }
 
 .bgRed {
     background-color: red;
     color: black;
+    border: 3px solid black;
 }
 
 .bgBlack {
     background-color: black;
+    border: 3px solid green;
 }
