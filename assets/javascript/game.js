@@ -97,14 +97,6 @@ $(document).ready(function () {
         $(value).removeClass("bgNormal").addClass($(value).parent().parent().attr("data-bgColor"));
     }
 
-    function getEnemies(val, enemyArray) {
-        charName = $(val).children().children(".playerName").text();
-        enemyArray = $.grep(chars, function (match) {
-            return match.name !== charName
-        })
-        return enemyArray
-    }
-
     function getStats(val, stats) {
         charName = $(val).children().children(".playerName").text();
         stats = $.grep(chars, function (match) {
@@ -128,11 +120,9 @@ $(document).ready(function () {
                     changeBGColor(value);
                     resetCardDeckMargin(index, value);
                 })
-                enemies = $.makeArray($("#enemies .card"));
-                console.log("enemies1: ", enemies);
             }
-            if ($(value).parent().parent().attr("id") !== "yourChar") {
-                if ($(enemies).length > 0 && $("#fight .card").length === 0) {
+            if ($(value).parent().parent().attr("id") !== "yourChar" && $(value).parent().parent().attr("id") !== "fight") {
+                if ($("#enemies .card").length > 0 && $("#fight .card").length === 0) {
                     removeChar(value);
                     enemyStats = getStats(value);
                     $(fightElem).append(newCardDeckDiv);
@@ -142,8 +132,9 @@ $(document).ready(function () {
                     }
                     resetCardMargin(value);
                     changeBGColor(value);
+                } else {
+                    alert("You already have an enemy to fight!");
                 }
-                console.log("enemies2: ", enemies);
             }
         })
     })
