@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    var yourStats;
+    var enemyStats;
+    var newAttackPower = 0;
     var chars = [{
         name: "Rey",
         attack: 6,
@@ -77,6 +80,10 @@ $(document).ready(function () {
         }
     }
 
+    function pageReload() {
+        location.reload();
+    }
+
     function makeCards(index, key) {
         var findCardDeckElem = $(".card-deck")
         var cardDiv = $("<div>");
@@ -111,13 +118,12 @@ $(document).ready(function () {
         var newCardDeckDiv = $("<div class=\"card-deck\">");
         var hideAvailCharsElem = $("#availChars");
         var yourCharElem = $("#yourChar");
-        var yourStats = [];
-        var enemyStats = [];
         var enemiesElem = $("#enemies");
         var fightElem = $("#fight");
         if ($("#availChars .card-deck").length > 0) {
             $(hideAvailCharsElem).css("display", "none");
             yourStats = getStats(this);
+            yourStats = yourStats.shift();
             removeChar(this);
             $(yourCharElem).append(newCardDeckDiv);
             $(newCardDeckDiv).append(this);
@@ -133,9 +139,13 @@ $(document).ready(function () {
             if ($("#enemies .card").length > 0 && $("#fight .card").length === 0) {
                 removeChar(this);
                 enemyStats = getStats(this);
+                enemyStats = enemyStats.shift();
                 $(fightElem).append(newCardDeckDiv);
                 $(newCardDeckDiv).append(this);
                 toggleChooseEnemy();
+                if ($("#myAttack").text()) {
+                    $("#myAttack").text("");
+                }
                 if ($("#enemies .card-deck .card").eq(0).hasClass("mx-1")) {
                     $("#enemies .card-deck .card").eq(0).removeClass("mx-1").addClass("mr-1");
                 }
@@ -150,7 +160,6 @@ $(document).ready(function () {
     function attacking() {
         var myAttackElem = $("#myAttack");
         var thierAttackElem = $("#theirAttack");
-        var newAttackPower = 0;
         if (!$("#yourChar .card").length) {
             alert("You must choose a character first!");
         } else {
@@ -158,6 +167,24 @@ $(document).ready(function () {
                 $("#myAttack").text("No enemy to attack");
                 $("#theirAttack").text("");
             } else {
+                newAttackPower = newAttackPower + yourStats.attack;
+                enemyStats.hp = enemyStats.hp - newAttackPower;
+                if (enemyStats.hp <= 0) {
+                    $("#fight .card").detach();
+                    $(myAttackElem).text("You have defeated " + enemyStats.name + ", you can choose another enemy to fight now.");
+                    $(thierAttackElem).text("");
+                } else {
+                    yourStats.hp = yourStats.hp - enemyStats.counterAttack;
+                    $("#yourChar .playerHP").text("hp: " + yourStats.hp);
+                    $("#fight .playerHP").text("hp: " + enemyStats.hp);
+                    $(myAttackElem).text("You attacked " + enemyStats.name + " for " + newAttackPower + " damage.");
+                    $(thierAttackElem).text(enemyStats.name + " attacked you back for " + enemyStats.counterAttack + " damage.");
+                    if  (yourStats.hp <= 0) {
+                        $(myAttackElem).text("Jedi Master, you are not! Back to training with Yoda, you shall go. Come back after you have mastered the ways of The Force!");
+                    $(thierAttackElem).text("");
+                    $("#restart").css("display", "block");
+                    }
+                }
 
             }
         }
@@ -165,8 +192,9 @@ $(document).ready(function () {
 
     $($.makeArray($("#availChars .card"))).each(function (index, value) {
         $(value).on("click", charInteraction)
-    })
+    });
 
-    $("#attack").on("click", attacking)
+    $("#attack").on("click", attacking);
 
+    $("#restart").on("click", pageReload);
 })

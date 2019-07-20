@@ -33,6 +33,10 @@ h1 {
     display: none;
 }
 
+#restart {
+    display: none;
+}
+
 .card-deck {
     max-width: 52%;
 }
