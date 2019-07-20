@@ -66,6 +66,17 @@ $(document).ready(function () {
         return stats
     }
 
+    function toggleChooseEnemy() {
+        var chooseEnemyElem = $("#chooseEnemy");
+        if ($(chooseEnemyElem).css("display") === "none") {
+            $(chooseEnemyElem).prev().removeClass("mb-0");
+            $(chooseEnemyElem).css("display", "block");
+        } else {
+            $(chooseEnemyElem).prev().addClass("mb-0");
+            $(chooseEnemyElem).css("display", "none");
+        }
+    }
+
     function makeCards(index, key) {
         var findCardDeckElem = $(".card-deck")
         var cardDiv = $("<div>");
@@ -112,6 +123,7 @@ $(document).ready(function () {
             $(newCardDeckDiv).append(this);
             $(oldCardDeckDiv).detach();
             $(enemiesElem).append(oldCardDeckDiv);
+            toggleChooseEnemy();
             $("#enemies .card-deck .card").each(function (index, value) {
                 changeBGColor(value);
                 resetCardDeckMargin(index, value);
@@ -123,6 +135,7 @@ $(document).ready(function () {
                 enemyStats = getStats(this);
                 $(fightElem).append(newCardDeckDiv);
                 $(newCardDeckDiv).append(this);
+                toggleChooseEnemy();
                 if ($("#enemies .card-deck .card").eq(0).hasClass("mx-1")) {
                     $("#enemies .card-deck .card").eq(0).removeClass("mx-1").addClass("mr-1");
                 }
