@@ -179,13 +179,12 @@ $(document).ready(function () {
                     $("#fight .playerHP").text("hp: " + enemyStats.hp);
                     $(myAttackElem).text("You attacked " + enemyStats.name + " for " + newAttackPower + " damage.");
                     $(thierAttackElem).text(enemyStats.name + " attacked you back for " + enemyStats.counterAttack + " damage.");
-                    if  (yourStats.hp <= 0) {
+                    if (yourStats.hp <= 0) {
                         $(myAttackElem).text("Jedi Master, you are not! Back to training with Yoda, you shall go. Come back after you have mastered the ways of The Force!");
-                    $(thierAttackElem).text("");
-                    $("#restart").css("display", "block");
+                        $(thierAttackElem).text("");
+                        $("#restart").css("display", "block");
                     }
                 }
-
             }
         }
     }
