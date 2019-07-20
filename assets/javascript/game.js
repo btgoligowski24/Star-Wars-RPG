@@ -6,11 +6,13 @@ $(document).ready(function () {
     var charName = "";
     var yourStats = [];
     var enemyStats = [];
+    var enemies;
     var enemiesElem = $("#enemies");
     var fightElem = $("#fight");
     var attackElem = $("#attack");
     var myAttackElem = $("#myAttack");
     var thierAttackElem = $("#theirAttack");
+    var newAttackPower = 0;
     var chars = [{
         name: "Rey",
         attack: 6,
@@ -69,7 +71,8 @@ $(document).ready(function () {
     }
     generateChars();
 
-    var charElems = $.makeArray($(".card"));
+    var charElems = $.makeArray($("#availChars .card"));
+    console.log(charElems);
 
     function removeChar(value) {
         $(value).detach();
@@ -94,8 +97,12 @@ $(document).ready(function () {
         $(value).removeClass("bgNormal").addClass($(value).parent().parent().attr("data-bgColor"));
     }
 
-    function charStats(charName, stats) {
-
+    function getEnemies(val, enemyArray) {
+        charName = $(val).children().children(".playerName").text();
+        enemyArray = $.grep(chars, function (match) {
+            return match.name !== charName
+        })
+        return enemyArray
     }
 
     function getStats(val, stats) {
@@ -112,7 +119,6 @@ $(document).ready(function () {
             if ($("#availChars .card-deck").length > 0) {
                 $(availCharsElem).css("display", "none");
                 yourStats = getStats(value);
-                console.log("ys1: ", yourStats);
                 removeChar(value);
                 $(yourCharElem).append(newCardDeckDiv);
                 $(newCardDeckDiv).append(value);
@@ -122,21 +128,26 @@ $(document).ready(function () {
                     changeBGColor(value);
                     resetCardDeckMargin(index, value);
                 })
-            } else if ($("#enemies .card").length > 0 && $("#fight .card").length === 0) {
-                removeChar(value);
-                enemyStats = getStats(value);
-                console.log("es1: ", enemyStats);
-                $(fightElem).append(newCardDeckDiv);
-                $(newCardDeckDiv).append(value);
-                if ($("#enemies .card").hasClass("mx-1")) {
-                    $("#enemies .card").removeClass("mx-1").addClass("mr-1");
+                enemies = $.makeArray($("#enemies .card"));
+                console.log("enemies1: ", enemies);
+            }
+            if ($(value).parent().parent().attr("id") !== "yourChar") {
+                if ($(enemies).length > 0 && $("#fight .card").length === 0) {
+                    removeChar(value);
+                    enemyStats = getStats(value);
+                    $(fightElem).append(newCardDeckDiv);
+                    $(newCardDeckDiv).append(value);
+                    if ($("#enemies .card-deck .card").eq(0).hasClass("mx-1")) {
+                        $("#enemies .card-deck .card").eq(0).removeClass("mx-1").addClass("mr-1");
+                    }
+                    resetCardMargin(value);
+                    changeBGColor(value);
                 }
-                resetCardMargin(value);
-                changeBGColor(value);
+                console.log("enemies2: ", enemies);
             }
         })
     })
-
+    
     $(attackElem).on("click", function () {
         if (!$("#yourChar .card").length) {
             alert("You must choose a character first!")
