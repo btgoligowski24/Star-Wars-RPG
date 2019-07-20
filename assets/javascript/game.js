@@ -6,7 +6,6 @@ $(document).ready(function () {
     var charName = "";
     var yourStats = [];
     var enemyStats = [];
-    var enemies;
     var enemiesElem = $("#enemies");
     var fightElem = $("#fight");
     var attackElem = $("#attack");
@@ -72,7 +71,6 @@ $(document).ready(function () {
     generateChars();
 
     var charElems = $.makeArray($("#availChars .card"));
-    console.log(charElems);
 
     function removeChar(value) {
         $(value).detach();
@@ -141,7 +139,7 @@ $(document).ready(function () {
     
     $(attackElem).on("click", function () {
         if (!$("#yourChar .card").length) {
-            alert("You must choose a character first!")
+            alert("You must choose a character first!");
         } else {
             if (!$("#fight .card").length) {
                 $("myAttack").text("No enemy to attack");
