@@ -1,7 +1,7 @@
 @import "fonts/starWarsFonts/stylesheet.css";
 
 body {
-    font-family: "moonhouseregular", Arial, Helvetica, sans-serif;
+    font-family: "anakinmonoregular", Arial, Helvetica, sans-serif;
     background-image: url("../../assets/images/starWarsBackground.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -23,10 +23,6 @@ h6 {
 
 h1 {
     font-size: 5em;
-}
-
-p {
-    font-size: 1.25em;
 }
 
 .container {

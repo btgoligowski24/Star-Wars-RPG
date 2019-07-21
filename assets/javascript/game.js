@@ -110,7 +110,7 @@ $(document).ready(function () {
         });
         $(cardBodyDiv).append(cardImg);
         $(cardFooter).attr("class", "card-title playerHP mt-2 mb-0");
-        $(cardFooter).text("hp: " + key.hp);
+        $(cardFooter).text("HP " + key.hp);
         $(cardBodyDiv).append(cardFooter);
     }
 
@@ -174,7 +174,7 @@ $(document).ready(function () {
                     if (enemyStats.hp <= 0) {
                         $("#fight .card").detach();
                         if (!$("#fight .card").length && !$("#enemies .card").length) {
-                            $(myAttackElem).text("Game over, you win!!! You are a TRUE JEDI MASTER! Click restart to Cosplay someone else.");
+                            $(myAttackElem).text("Game over, you win!!! You are a TRUE JEDI MASTER! Click restart to play as someone else.");
                             $(thierAttackElem).text("");
                             $("#restart").text("Restart");
                             $("#restart").css("display", "block");
