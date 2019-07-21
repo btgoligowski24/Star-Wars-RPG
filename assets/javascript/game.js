@@ -166,29 +166,33 @@ $(document).ready(function () {
                 $("#myAttack").text("No enemy to attack");
                 $("#theirAttack").text("");
             } else {
-                newAttackPower = newAttackPower + yourStats.attack;
-                enemyStats.hp = enemyStats.hp - newAttackPower;
-                if (enemyStats.hp <= 0) {
-                    $("#fight .card").detach();
-                    if (!$("#fight .card").length && !$("#enemies .card").length) {
-                        $(myAttackElem).text("Game over, you win!!! You are a TRUE JEDI MASTER! Click restart to Cosplay someone else.");
-                        $(thierAttackElem).text("");
-                        $("#restart").text("Restart");
-                        $("#restart").css("display", "block");
-                    } else {
-                        $(myAttackElem).text("You have defeated " + enemyStats.name + ", you can choose another enemy to fight now.");
-                        $(thierAttackElem).text("");
-                    }
+                if (yourStats.hp <= 0) {
+                    return
                 } else {
-                    yourStats.hp = yourStats.hp - enemyStats.counterAttack;
-                    $("#yourChar .playerHP").text("hp: " + yourStats.hp);
-                    $("#fight .playerHP").text("hp: " + enemyStats.hp);
-                    $(myAttackElem).text("You attacked " + enemyStats.name + " for " + newAttackPower + " damage.");
-                    $(thierAttackElem).text(enemyStats.name + " attacked you back for " + enemyStats.counterAttack + " damage.");
-                    if (yourStats.hp <= 0) {
-                        $(myAttackElem).text("Jedi Master, you are not! Back to training with Yoda, you shall go. Come back after you have mastered the ways of The Force!");
-                        $(thierAttackElem).text("");
-                        $("#restart").css("display", "block");
+                    newAttackPower = newAttackPower + yourStats.attack;
+                    enemyStats.hp = enemyStats.hp - newAttackPower;
+                    if (enemyStats.hp <= 0) {
+                        $("#fight .card").detach();
+                        if (!$("#fight .card").length && !$("#enemies .card").length) {
+                            $(myAttackElem).text("Game over, you win!!! You are a TRUE JEDI MASTER! Click restart to Cosplay someone else.");
+                            $(thierAttackElem).text("");
+                            $("#restart").text("Restart");
+                            $("#restart").css("display", "block");
+                        } else {
+                            $(myAttackElem).text("You have defeated " + enemyStats.name + ", you can choose another enemy to fight now.");
+                            $(thierAttackElem).text("");
+                        }
+                    } else {
+                        yourStats.hp = yourStats.hp - enemyStats.counterAttack;
+                        $("#yourChar .playerHP").text("hp: " + yourStats.hp);
+                        $("#fight .playerHP").text("hp: " + enemyStats.hp);
+                        $(myAttackElem).text("You attacked " + enemyStats.name + " for " + newAttackPower + " damage.");
+                        $(thierAttackElem).text(enemyStats.name + " attacked you back for " + enemyStats.counterAttack + " damage.");
+                        if (yourStats.hp <= 0) {
+                            $(myAttackElem).text("Jedi Master, you are not! Back to training with Yoda, you shall go. Come back after you have mastered the ways of The Force!");
+                            $(thierAttackElem).text("");
+                            $("#restart").css("display", "block");
+                        }
                     }
                 }
             }
