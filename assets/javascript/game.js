@@ -5,27 +5,27 @@ $(document).ready(function () {
     var newAttackPower = 0;
     var chars = [{
         name: "Rey",
-        attack: 6,
-        counterAttack: 20,
-        hp: 100,
+        attack: 10,
+        counterAttack: 18,
+        hp: 130,
         img: "assets/images/rey.jfif"
     }, {
         name: "Luke",
-        attack: 8,
-        counterAttack: 25,
+        attack: 12,
+        counterAttack: 10,
         hp: 150,
         img: "assets/images/luke.jpg"
     }, {
         name: "Darth Maul",
-        attack: 10,
-        counterAttack: 25,
-        hp: 200,
+        attack: 6,
+        counterAttack: 20,
+        hp: 180,
         img: "assets/images/darthMaul.jpg"
     }, {
         name: "Darth vader",
-        attack: 12,
-        counterAttack: 30,
-        hp: 250,
+        attack: 3,
+        counterAttack: 24,
+        hp: 220,
         img: "assets/images/darthVader.jfif"
     }];
 
@@ -66,6 +66,7 @@ $(document).ready(function () {
         stats = $.grep(chars, function (match) {
             return match.name === charName
         })
+        stats = stats.shift();
         return stats
     }
 
@@ -123,7 +124,6 @@ $(document).ready(function () {
         if ($("#availChars .card-deck").length > 0) {
             $(hideAvailCharsElem).css("display", "none");
             yourStats = getStats(this);
-            yourStats = yourStats.shift();
             removeChar(this);
             $(yourCharElem).append(newCardDeckDiv);
             $(newCardDeckDiv).append(this);
@@ -139,7 +139,6 @@ $(document).ready(function () {
             if ($("#enemies .card").length > 0 && $("#fight .card").length === 0) {
                 removeChar(this);
                 enemyStats = getStats(this);
-                enemyStats = enemyStats.shift();
                 $(fightElem).append(newCardDeckDiv);
                 $(newCardDeckDiv).append(this);
                 toggleChooseEnemy();
@@ -171,8 +170,15 @@ $(document).ready(function () {
                 enemyStats.hp = enemyStats.hp - newAttackPower;
                 if (enemyStats.hp <= 0) {
                     $("#fight .card").detach();
-                    $(myAttackElem).text("You have defeated " + enemyStats.name + ", you can choose another enemy to fight now.");
-                    $(thierAttackElem).text("");
+                    if (!$("#fight .card").length && !$("#enemies .card").length) {
+                        $(myAttackElem).text("Game over, you win!!! You are a TRUE JEDI MASTER! Click restart to Cosplay someone else.");
+                        $(thierAttackElem).text("");
+                        $("#restart").text("Restart");
+                        $("#restart").css("display", "block");
+                    } else {
+                        $(myAttackElem).text("You have defeated " + enemyStats.name + ", you can choose another enemy to fight now.");
+                        $(thierAttackElem).text("");
+                    }
                 } else {
                     yourStats.hp = yourStats.hp - enemyStats.counterAttack;
                     $("#yourChar .playerHP").text("hp: " + yourStats.hp);
@@ -186,6 +192,7 @@ $(document).ready(function () {
                     }
                 }
             }
+
         }
     }
 
