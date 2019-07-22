@@ -121,6 +121,7 @@ $(document).ready(function () {
             $(hideAvailCharsElem).css("display", "none");
             yourStats = getStats(this);
             removeChar(this);
+            $("#yourChar h3").attr("class", "mb-0");
             $(yourCharElem).append(row1Elem);
             $(row1Elem).append(col1Elem);
             $(col1Elem).append(row2Elem);
