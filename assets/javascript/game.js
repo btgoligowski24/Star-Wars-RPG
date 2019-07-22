@@ -85,7 +85,7 @@ $(document).ready(function () {
         var cardHeader = $("<h5>");
         var cardImg = $("<img>");
         var cardFooter = $("<p>");
-        $(col2Elem).attr("class", "col-xl-3 col-md-4 col-sm-6 p-sm-1 p-md-0 mt-2 column2");
+        $(col2Elem).attr("class", "col-xl-3 col-md-4 col-sm-6 mx-sm-auto mx-md-0 p-sm-1 p-md-0 mt-2 column2");
         $(cardDiv).attr("class", "card text-center m-1 mx-md-1 my-md-0 bgNormal");
         $(findRow2Elem).append(col2Elem);
         $(col2Elem).append(cardDiv);
@@ -173,7 +173,7 @@ $(document).ready(function () {
                             $(myAttackElem).text("Game over, you win!!! You are a TRUE JEDI MASTER! Click restart to play as someone else.");
                             $(thierAttackElem).text("");
                             $("#restart").text("Restart");
-                            $("#restart").css("display", "block");
+                            $("#restart").css("display", "inline-block");
                         } else {
                             $(myAttackElem).text("You have defeated " + enemyStats.name + ", you can choose another enemy to fight now.");
                             $(thierAttackElem).text("");
@@ -187,7 +187,7 @@ $(document).ready(function () {
                         if (yourStats.hp <= 0) {
                             $(myAttackElem).text("Jedi Master, you are not! Back to training with Yoda, you shall go. Come back after you have mastered the ways of The Force!");
                             $(thierAttackElem).text("");
-                            $("#restart").css("display", "block");
+                            $("#restart").css("display", "inline-block");
                         }
                     }
                 }
