@@ -38,7 +38,7 @@ $(document).ready(function () {
         var availCharsElem = $("#availChars");
         $(row1Elem).attr("class", "row row1");
         $(col1Elem).attr("class", "col-xl-7 column1");
-        $(row2Elem).attr("class", "row mx-0 row2");
+        $(row2Elem).attr("class", "row mx-0 mb-2 row2");
         $(availCharsElem).append(row1Elem);
         $(row1Elem).append(col1Elem);
         $(col1Elem).append(row2Elem);
@@ -116,7 +116,7 @@ $(document).ready(function () {
         var fightElem = $("#fight");
         $(row1Elem).attr("class", "row row1");
         $(col1Elem).attr("class", "col-xl-7 column1");
-        $(row2Elem).attr("class", "row mx-0 row2");
+        $(row2Elem).attr("class", "row mx-0 mb-2 row2");
         if ($("#availChars .row1").length > 0) {
             $(hideAvailCharsElem).css("display", "none");
             yourStats = getStats(this);
