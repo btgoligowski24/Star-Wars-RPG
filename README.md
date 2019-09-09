@@ -1,4 +1,4 @@
-# unit-4-game
+# Star-Wars-RPG
 
 ## What is this?
 This is a very basic rpg game where a person chooses a character and tries to defeat the remaining enemies. It's mobile responsive and should work on all screens sizes.
